@@ -8,7 +8,7 @@ namespace RocketWar
     {
         protected override string RocketType { get; set; } = "Tactical missile";
 
-        public TacticalMissile(bool isNuclear) : base(isNuclear)
+        public TacticalMissile(MissilesSizes size, bool isNuclear) : base(size, isNuclear)
         {
         }
         public override string GetStatus()

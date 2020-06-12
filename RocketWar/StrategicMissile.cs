@@ -8,7 +8,7 @@ namespace RocketWar
     {
         protected override string RocketType { get; set; } = "Strategic missile";
 
-        public StrategicMissile(bool isNuclear) : base(isNuclear)
+        public StrategicMissile(MissilesSizes size, bool isNuclear) : base(size, isNuclear)
         {
         }
         public override string GetStatus()
@@ -23,6 +23,8 @@ namespace RocketWar
 
         public override void RadiusCalculator(int miles)
         {
+            if (miles < 0)
+                throw new ArgumentException("Количество миль не может быть меньше 0");
             RocketRadius *= (miles * 3);
         }
     }

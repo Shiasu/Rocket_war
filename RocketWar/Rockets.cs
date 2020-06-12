@@ -13,10 +13,12 @@ namespace RocketWar
 
         public int RocketRadius { get; protected set; } = 1;
 
-        public bool IsNuclear { get; private set; } = false;
+        public bool IsNuclear { get; private set; }
+        public MissilesSizes Size { get; private set; }
 
-        public Rockets(bool IsNuclear = false)
+        public Rockets(MissilesSizes size, bool IsNuclear = false)
         {
+            this.Size = size;
             this.IsNuclear = IsNuclear;
         }
 
@@ -37,18 +39,25 @@ namespace RocketWar
 
         public virtual void RocketBuilder(int amount)
         {
+            if (amount < 0)
+                throw new ArgumentException("Количество построенных ракет не может быть меньше 0");
             Console.WriteLine($"{amount} ракет построено!");
             RocketsAmount += amount;
         }
 
         public virtual void RocketLauncher(int amount)
         {
+            if (amount < 0)
+                throw new ArgumentException("Количество запущенных ракет не может быть меньше 0");
             Console.WriteLine($"{amount} ракет запущено!");
             RocketsAmount -= amount;
         }
 
         public virtual void DamageCalculator(int damage)
         {
+            if (damage < 1)
+                throw new ArgumentException("Количество урона не может быть меньше 1");
+
             if (IsNuclear)
             {
                 RocketDamage *= (damage * 5);
